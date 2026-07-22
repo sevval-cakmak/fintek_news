@@ -2,6 +2,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from transformers import pipeline
 import requests
+import os
+from dotenv import load_dotenv
+
+# .env dosyasındaki değişkenleri ortam değişkenlerine yükle
+load_dotenv()
 
 app = FastAPI()
 
@@ -14,7 +19,8 @@ app.add_middleware(
 
 sentiment = pipeline("text-classification", model="ProsusAI/finbert")
 
-NEWS_API_KEY = "REMOVED_API_KEY"
+# API anahtarı .env dosyasından okunur, asla koda yazılmaz
+NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 
 @app.get("/analyze/{hisse}")
 def analyze(hisse: str):
