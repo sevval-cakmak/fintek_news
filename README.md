@@ -1,6 +1,6 @@
-# Borsa Haber Duygu Analizi
+# 📈 FinTech News Sentiment Analysis
 
-FinBERT NLP modeli ile finans haberlerini analiz eden, piyasa duyarlılığını görselleştiren bir web uygulaması.
+Financial news sentiment analysis application powered by FinBERT, FastAPI and React.
 
 ---
 
@@ -8,38 +8,37 @@ FinBERT NLP modeli ile finans haberlerini analiz eden, piyasa duyarlılığını
 
 ### Proje Hakkında
 
-Bu uygulama, kullanıcının girdiği hisse senedi adına ait İngilizce finans haberlerini NewsAPI üzerinden çeker. Her haber başlığı ve açıklaması, finansal metinler için ince ayar yapılmış bir BERT modeli olan [ProsusAI/FinBERT](https://huggingface.co/ProsusAI/finbert) ile analiz edilir. Analiz sonuçları (pozitif / negatif / nötr) React tabanlı bir arayüzde grafik ve kartlar şeklinde gösterilir.
+Bu proje, kullanıcı tarafından girilen hisse senedi adına ait güncel finans haberlerini **NewsAPI** üzerinden alarak **FinBERT** modeli ile duygu analizi gerçekleştirir. Analiz sonuçları; duygu dağılımı, özet istatistikler ve görselleştirmeler ile kullanıcıya sunulur.
 
-> **Uyarı:** Uygulama yatırım tavsiyesi vermez. Çıktılar yalnızca haber duygu dağılımına dayanmaktadır.
+> **Not:** Bu uygulama yatırım tavsiyesi sunmaz. Sonuçlar yalnızca haber içeriklerinin duygu analizine dayanmaktadır.
 
 ### Özellikler
 
-- Hisse senedi adına göre İngilizce haber arama (NewsAPI, max 10 haber)
-- FinBERT ile her haber için duygu sınıflandırması (positive / negative / neutral) ve güven skoru
-- Pozitif haber sayısı negatiften fazlaysa "AL", aksi halde "SATMA / BEKLE" tavsiyesi
-- Toplam / pozitif / negatif / nötr haber sayısı özeti
-- Recharts kütüphanesi ile duygu dağılım çubuğu grafiği
-- SVG tabanlı yarım daire duyarlılık göstergesi (0-100 puan)
-- Her haber için başlık, duygu etiketi, güven skoru çubuğu ve orijinal habere bağlantı
-- Popüler hisse kısayolları (Apple, Tesla, Nvidia, Microsoft)
-- Yükleme, hata ve boş durum ekranları
-- Framer Motion animasyonları, glassmorphism arayüz tasarımı
+- NewsAPI üzerinden finans haberlerini getirme
+- FinBERT modeli ile haber duygu analizi
+- Pozitif, negatif ve nötr duygu sınıflandırması
+- Duygu dağılımının grafiklerle görselleştirilmesi
+- Hisse bazlı genel piyasa duyarlılığı özeti
+- Modern ve responsive kullanıcı arayüzü
 
 ### Kullanılan Teknolojiler
 
-**Backend**
-- Python 3
-- FastAPI
-- Hugging Face Transformers (`ProsusAI/finbert`)
-- NewsAPI (harici haber kaynağı)
-- `requests` kütüphanesi
+#### Backend
 
-**Frontend**
-- React 19
-- Vite 8
-- Tailwind CSS 4
-- Framer Motion
+- Python
+- FastAPI
+- Hugging Face Transformers
+- FinBERT (ProsusAI)
+- NewsAPI
+- Requests
+
+#### Frontend
+
+- React
+- Vite
+- Tailwind CSS
 - Recharts
+- Framer Motion
 - Axios
 - Lucide React
 
@@ -49,40 +48,38 @@ Bu uygulama, kullanıcının girdiği hisse senedi adına ait İngilizce finans 
 
 - Python 3.9+
 - Node.js 18+
-- [NewsAPI](https://newsapi.org) API anahtarı
+- NewsAPI API Key
 
 #### Backend
 
 ```bash
 cd backend
-pip install fastapi uvicorn transformers requests torch
-```
 
-`main.py` dosyasındaki `NEWS_API_KEY` değişkenine kendi API anahtarınızı girin.
+pip install fastapi uvicorn transformers torch requests
 
-```bash
 uvicorn main:app --reload
-# Sunucu http://127.0.0.1:8000 adresinde başlar
 ```
 
-> **Not:** FinBERT modeli ilk çalıştırmada Hugging Face'den indirilir (~400 MB).
+`main.py` dosyasındaki `NEWS_API_KEY` değişkenine kendi API anahtarınızı ekleyin.
+
+> İlk çalıştırmada FinBERT modeli Hugging Face üzerinden indirilecektir.
 
 #### Frontend
 
 ```bash
 cd frontend
+
 npm install
 npm run dev
-# Uygulama http://localhost:5173 adresinde açılır
 ```
 
 ### Kullanım
 
-1. Backend sunucusunun çalıştığından emin olun (`http://127.0.0.1:8000`).
-2. Frontend'i tarayıcıda açın.
-3. Arama kutusuna bir hisse senedi adı girin (örn. `Apple`, `Tesla`).
-4. "Analiz Et" düğmesine tıklayın.
-5. Sonuçlar grafik ve kartlar şeklinde görüntülenir.
+1. Backend sunucusunu çalıştırın.
+2. Frontend uygulamasını başlatın.
+3. Bir hisse senedi adı girin (örn. Apple, Tesla).
+4. Analizi başlatın.
+5. Haber duygu analizi sonuçlarını grafikler ve özet bilgiler ile inceleyin.
 
 ---
 
@@ -90,38 +87,37 @@ npm run dev
 
 ### Project Overview
 
-This application fetches English-language financial news articles for a given stock name via NewsAPI. Each article's title and description is analyzed using [ProsusAI/FinBERT](https://huggingface.co/ProsusAI/finbert), a BERT model fine-tuned for financial sentiment classification. Results (positive / negative / neutral) are displayed in a React-based dashboard with charts and cards.
+This project retrieves the latest financial news for a given stock using **NewsAPI** and performs sentiment analysis with the **FinBERT** model. The results are presented through charts, summary statistics, and an interactive web interface.
 
-> **Disclaimer:** This application does not provide investment advice. All outputs are based solely on news sentiment distribution.
+> **Disclaimer:** This application does not provide investment advice. Results are based solely on sentiment analysis of news articles.
 
 ### Features
 
-- News search by stock name via NewsAPI (up to 10 articles per query)
-- Per-article sentiment classification (positive / negative / neutral) and confidence score using FinBERT
-- Buy ("AL") recommendation when positive count exceeds negative, otherwise Hold/Sell ("SATMA / BEKLE")
-- Summary statistics: total / positive / negative / neutral article counts
-- Bar chart of sentiment distribution using Recharts
-- SVG-based semicircular sentiment gauge (0–100 score)
-- News cards showing title, sentiment label, confidence progress bar, and source link
-- Quick-search shortcuts for popular stocks (Apple, Tesla, Nvidia, Microsoft)
-- Loading, error, and empty state screens
-- Framer Motion animations, glassmorphism UI design
+- Retrieve financial news via NewsAPI
+- Sentiment analysis using FinBERT
+- Positive, negative and neutral classification
+- Interactive sentiment visualization
+- Overall market sentiment summary
+- Modern and responsive user interface
 
 ### Technologies
 
-**Backend**
-- Python 3
-- FastAPI
-- Hugging Face Transformers (`ProsusAI/finbert`)
-- NewsAPI (external news source)
-- `requests` library
+#### Backend
 
-**Frontend**
-- React 19
-- Vite 8
-- Tailwind CSS 4
-- Framer Motion
+- Python
+- FastAPI
+- Hugging Face Transformers
+- FinBERT (ProsusAI)
+- NewsAPI
+- Requests
+
+#### Frontend
+
+- React
+- Vite
+- Tailwind CSS
 - Recharts
+- Framer Motion
 - Axios
 - Lucide React
 
@@ -131,37 +127,35 @@ This application fetches English-language financial news articles for a given st
 
 - Python 3.9+
 - Node.js 18+
-- [NewsAPI](https://newsapi.org) API key
+- NewsAPI API Key
 
 #### Backend
 
 ```bash
 cd backend
-pip install fastapi uvicorn transformers requests torch
-```
 
-Set your API key in the `NEWS_API_KEY` variable inside `main.py`.
+pip install fastapi uvicorn transformers torch requests
 
-```bash
 uvicorn main:app --reload
-# Server starts at http://127.0.0.1:8000
 ```
 
-> **Note:** The FinBERT model is downloaded from Hugging Face on first run (~400 MB).
+Add your NewsAPI key to the `NEWS_API_KEY` variable in `main.py`.
+
+> The FinBERT model will be downloaded from Hugging Face during the first run.
 
 #### Frontend
 
 ```bash
 cd frontend
+
 npm install
 npm run dev
-# App opens at http://localhost:5173
 ```
 
 ### Usage
 
-1. Make sure the backend server is running at `http://127.0.0.1:8000`.
-2. Open the frontend in your browser.
-3. Enter a stock name in the search box (e.g. `Apple`, `Tesla`).
-4. Click "Analiz Et" (Analyze).
-5. Results are displayed as charts and cards.
+1. Start the backend server.
+2. Launch the frontend application.
+3. Enter a stock name (e.g. Apple or Tesla).
+4. Run the analysis.
+5. Review the sentiment results through charts and summary statistics.
