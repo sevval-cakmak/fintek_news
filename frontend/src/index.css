@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme {
+  --color-fintech-bg: #0f172a;
+  --color-fintech-card: #1e293b;
+  --color-fintech-accent: #38bdf8;
+  --color-fintech-accent-hover: #7dd3fc;
+  --color-fintech-positive: #10b981;
+  --color-fintech-negative: #ef4444;
+  --color-fintech-neutral: #64748b;
+
+  --shadow-glow-positive: 0 0 16px -3px rgba(16, 185, 129, 0.25);
+  --shadow-glow-negative: 0 0 16px -3px rgba(239, 68, 68, 0.25);
+  --shadow-glow-accent: 0 0 16px -3px rgba(56, 189, 248, 0.2);
+}
+
+@layer base {
+  body {
+    @apply bg-fintech-bg text-slate-100 font-sans antialiased selection:bg-fintech-accent/30 selection:text-fintech-accent;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.03) 0px, transparent 50%),
+      radial-gradient(at 50% 0%, rgba(16, 185, 129, 0.02) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(239, 68, 68, 0.02) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+}
+
+/* TradingView ve Bloomberg Terminal tarzı premium koyu scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Cam Morfolojisi (Glassmorphism) Yardımcı Sınıfları */
+.glass-panel {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-panel-accent {
+  background: rgba(56, 189, 248, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 189, 248, 0.1);
+}
+
+.glass-input {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-input:focus {
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
+  outline: none;
+}
